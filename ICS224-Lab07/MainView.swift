@@ -13,6 +13,8 @@ public enum Pages{
 
 struct MainView: View {
     @State var visiblePage: Pages = Pages.START;
+    @EnvironmentObject var cards: CardList
+    
     var body: some View {
         NavigationStack{
             VStack{

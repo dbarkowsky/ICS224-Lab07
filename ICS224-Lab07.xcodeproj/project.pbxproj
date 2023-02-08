@@ -33,6 +33,12 @@
 		F311EDB7299456880071F7BE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F311EDB6299456880071F7BE /* MainView.swift */; };
 		F311EDB8299456880071F7BE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F311EDB6299456880071F7BE /* MainView.swift */; };
 		F311EDB9299456880071F7BE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F311EDB6299456880071F7BE /* MainView.swift */; };
+		F311EDBB29945E830071F7BE /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = F311EDBA29945E830071F7BE /* Card.swift */; };
+		F311EDBC29945E830071F7BE /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = F311EDBA29945E830071F7BE /* Card.swift */; };
+		F311EDBD29945E830071F7BE /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = F311EDBA29945E830071F7BE /* Card.swift */; };
+		F311EDBF2994633E0071F7BE /* CardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F311EDBE2994633E0071F7BE /* CardList.swift */; };
+		F311EDC02994633E0071F7BE /* CardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F311EDBE2994633E0071F7BE /* CardList.swift */; };
+		F311EDC12994633E0071F7BE /* CardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F311EDBE2994633E0071F7BE /* CardList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +74,8 @@
 		F311EDAE299450420071F7BE /* Preview Content */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Preview Content"; sourceTree = "<group>"; };
 		F311EDB22994504C0071F7BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F311EDB6299456880071F7BE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		F311EDBA29945E830071F7BE /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		F311EDBE2994633E0071F7BE /* CardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +135,8 @@
 				F311EDA629944DC70071F7BE /* SettingsRowView.swift */,
 				F311EDB22994504C0071F7BE /* Assets.xcassets */,
 				F311EDAE299450420071F7BE /* Preview Content */,
+				F311EDBA29945E830071F7BE /* Card.swift */,
+				F311EDBE2994633E0071F7BE /* CardList.swift */,
 			);
 			path = "ICS224-Lab07";
 			sourceTree = "<group>";
@@ -286,9 +296,11 @@
 				F311EDB7299456880071F7BE /* MainView.swift in Sources */,
 				F311ED9B29944D4B0071F7BE /* SettingsView.swift in Sources */,
 				F311EDA729944DC70071F7BE /* SettingsRowView.swift in Sources */,
+				F311EDBF2994633E0071F7BE /* CardList.swift in Sources */,
 				F311EDA329944D860071F7BE /* GameView.swift in Sources */,
 				F311EDAB29944DDA0071F7BE /* CardView.swift in Sources */,
 				F311ED7129944C520071F7BE /* ICS224_Lab07App.swift in Sources */,
+				F311EDBB29945E830071F7BE /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,10 +310,12 @@
 			files = (
 				F311EDA829944DC70071F7BE /* SettingsRowView.swift in Sources */,
 				F311EDB8299456880071F7BE /* MainView.swift in Sources */,
+				F311EDBC29945E830071F7BE /* Card.swift in Sources */,
 				F311ED8229944C540071F7BE /* ICS224_Lab07Tests.swift in Sources */,
 				F311EDA429944D860071F7BE /* GameView.swift in Sources */,
 				F311EDA029944D760071F7BE /* StartView.swift in Sources */,
 				F311EDAC29944DDA0071F7BE /* CardView.swift in Sources */,
+				F311EDC02994633E0071F7BE /* CardList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,9 +327,11 @@
 				F311EDB9299456880071F7BE /* MainView.swift in Sources */,
 				F311ED8E29944C540071F7BE /* ICS224_Lab07UITestsLaunchTests.swift in Sources */,
 				F311EDA929944DC70071F7BE /* SettingsRowView.swift in Sources */,
+				F311EDC12994633E0071F7BE /* CardList.swift in Sources */,
 				F311EDA529944D860071F7BE /* GameView.swift in Sources */,
 				F311EDAD29944DDA0071F7BE /* CardView.swift in Sources */,
 				F311ED8C29944C540071F7BE /* ICS224_Lab07UITests.swift in Sources */,
+				F311EDBD29945E830071F7BE /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

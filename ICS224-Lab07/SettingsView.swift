@@ -8,8 +8,22 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @StateObject var treasures = CardList()
+    
     var body: some View {
-        Text("Settings View")
+        VStack{
+            List($treasures.cards){
+                $card in
+                SettingsRowView(treasure: $card)
+                .swipeActions(edge: .trailing){
+                    Button(role: .destructive){
+                        treasures.cards.removeAll(where: {$0.id == card.id})
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                }
+            }
+        }
     }
 }
 
