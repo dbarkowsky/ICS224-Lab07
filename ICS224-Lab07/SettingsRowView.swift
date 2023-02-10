@@ -9,31 +9,40 @@ import SwiftUI
 
 struct SettingsRowView: View {
     @Binding var treasure: Card
-    private let range = 2...10;
+    private let groupRange = 2...10;
+    private let amtRange = 1...10;
     var body: some View {
         HStack {
-            Text("tester")
-                .padding(0.0)
-            Spacer()
-                .padding(.trailing, 20.0)
+            TextEditor(text: Binding(
+                get: {
+                    treasure.name
+                },
+                set: {
+                    newValue in
+                    treasure.name = newValue
+                }
+            ))
+            .frame(height: 40.0)
+//            Spacer()
+//                .padding(0.0)
             Stepper(value: Binding(
                 get: {treasure.groupSize},
                 set: {
                     newValue in
                     treasure.groupSize = newValue
-                }), in: range, step: 1){
+                }), in: groupRange, step: 1){
                 Text("\(treasure.groupSize)/group")
                 }
-                .padding(20.0)
+                .padding(.horizontal, 15.0)
             Stepper(value: Binding(
                 get: {treasure.groupAmt},
                 set: {
                     newValue in
                     treasure.groupAmt = newValue
-                }), in: range, step: 1){
+                }), in: amtRange, step: 1){
                 Text("\(treasure.groupAmt) group")
                 }
-                .padding(20.0)
+                .padding(.horizontal, 15.0)
         }
         .padding()
     }

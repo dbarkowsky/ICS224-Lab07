@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @StateObject var treasures = CardList()
-    
+//    @StateObject var treasures = CardList()
+    @ObservedObject var treasures: CardList
     var body: some View {
         VStack{
             List($treasures.cards){
@@ -24,11 +24,29 @@ struct SettingsView: View {
                 }
             }
         }
+        .navigationTitle("Treasures")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing){
+                    Button(
+                        action: {
+                            withAnimation {
+                                
+                                let newRow = Card(name: "Change me", groupSize: 2, groupAmt: 1)
+                                treasures.cards.insert(newRow, at: 0)
+                            }
+                        }
+                    ){
+                        Image(systemName: "plus")
+                    }.accessibilityIdentifier("PlusButton")
+                
+            }
+        }
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
+    @StateObject static var treasures = CardList()
     static var previews: some View {
-        SettingsView()
+        SettingsView(treasures: treasures)
     }
 }
