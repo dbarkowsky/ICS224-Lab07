@@ -8,16 +8,15 @@
 import SwiftUI
 
 struct SettingsView: View {
-//    @StateObject var treasures = CardList()
-    @ObservedObject var treasures: CardList
+    @ObservedObject var treasures: TreasureList
     var body: some View {
         VStack{
-            List($treasures.cards){
-                $card in
-                SettingsRowView(treasure: $card)
+            List($treasures.items){
+                $item in
+                SettingsRowView(treasure: $item)
                 .swipeActions(edge: .trailing){
                     Button(role: .destructive){
-                        treasures.cards.removeAll(where: {$0.id == card.id})
+                        treasures.items.removeAll(where: {$0.id == item.id})
                     } label: {
                         Label("Delete", systemImage: "trash")
                     }
@@ -31,8 +30,8 @@ struct SettingsView: View {
                         action: {
                             withAnimation {
                                 
-                                let newRow = Card(name: "Change me", groupSize: 2, groupAmt: 1)
-                                treasures.cards.insert(newRow, at: 0)
+                                let newRow = Treasure(name: "Change me", groupSize: 2, groupAmt: 1)
+                                treasures.items.insert(newRow, at: 0)
                             }
                         }
                     ){
@@ -45,7 +44,7 @@ struct SettingsView: View {
 }
 
 struct SettingsView_Previews: PreviewProvider {
-    @StateObject static var treasures = CardList()
+    @StateObject static var treasures = TreasureList()
     static var previews: some View {
         SettingsView(treasures: treasures)
     }

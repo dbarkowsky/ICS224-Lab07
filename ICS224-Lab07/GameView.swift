@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct GameView: View {
-    @ObservedObject var treasures: CardList
+    @ObservedObject var treasures: TreasureList
     @State var matchedPairs: Int = 0
     @State var attempts: Int = 0
     
     var body: some View {
-        Text("\(treasures.cards[0].name), \(treasures.cards[0].groupSize)")
+        Text("\(treasures.items[0].name), \(treasures.items[0].groupSize)")
         Text("Attempts: \(attempts)")
         Text("Total Remaining: \(determineTotalRemaining())")
     }
     
     func determineTotalRemaining() -> Int {
-        return treasures.cards.reduce(0, {
+        return treasures.items.reduce(0, {
             acc, curr in
             acc + curr.groupAmt
         }) - matchedPairs
@@ -27,7 +27,7 @@ struct GameView: View {
 }
 
 struct GameView_Previews: PreviewProvider {
-    @StateObject static var treasures = CardList()
+    @StateObject static var treasures = TreasureList()
     static var previews: some View {
         GameView(treasures: treasures)
     }

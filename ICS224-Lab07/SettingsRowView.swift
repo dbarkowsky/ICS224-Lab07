@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsRowView: View {
-    @Binding var treasure: Card
+    @Binding var treasure: Treasure
     private let groupRange = 2...10;
     private let amtRange = 1...10;
     var body: some View {
@@ -49,7 +49,7 @@ struct SettingsRowView: View {
 }
 
 struct SettingsRowView_Previews: PreviewProvider {
-    @State static var sampleCard: Card = Card(name: "flower", groupSize: 2, groupAmt: 1)
+    @State static var sampleCard: Treasure = Treasure(name: "flower", groupSize: 2, groupAmt: 1)
     static var previews: some View {
         SettingsRowView(treasure: $sampleCard)
     }
