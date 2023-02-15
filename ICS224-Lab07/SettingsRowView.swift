@@ -23,6 +23,7 @@ struct SettingsRowView: View {
                 }
             ))
             .frame(height: 40.0)
+            .textInputAutocapitalization(.never)
 //            Spacer()
 //                .padding(0.0)
             Stepper(value: Binding(

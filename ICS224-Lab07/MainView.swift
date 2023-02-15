@@ -15,6 +15,47 @@ struct MainView: View {
     @State var visiblePage: Pages = Pages.START;
     @StateObject var treasures = TreasureList()
     
+    func buildCardList(treasures: TreasureList) -> [CardView] {
+        let uniqueCards = treasures.items.map{
+            treasure in
+            CardView(
+                picture: UIImage(systemName: treasure.name) ?? UIImage(systemName: "questionmark.circle"),
+                groupSize: treasure.groupSize,
+                groupAmt: treasure.groupAmt
+            )
+        }
+        var cardCount = uniqueCards.count
+        
+        var cards: [CardView] = []
+        
+        for card in uniqueCards{
+            let amountToAdd = (card.groupSize * card.groupAmt)
+            for _ in 0..<amountToAdd{
+                cards.append(
+                    CardView(
+                        picture: card.picture,
+                        groupSize: card.groupSize,
+                        groupAmt: card.groupAmt
+                    )
+                )
+            }
+        }
+        
+        cardCount = cards.count
+        let nextPerfectSquare = findNextPerfectSquare(currentCount: cardCount)
+        
+        for _ in cardCount..<nextPerfectSquare {
+            cards.append(CardView(picture: UIImage(systemName: "circlebadge")))
+        }
+        
+        return cards.shuffled()
+    }
+    
+    func findNextPerfectSquare(currentCount: Int) -> Int {
+        let next = Double(currentCount).squareRoot().rounded(.down) + 1
+        return Int(next * next)
+    }
+    
     var body: some View {
         NavigationStack{
             VStack{
@@ -22,7 +63,7 @@ struct MainView: View {
                 case Pages.START:
                     StartView()
                 case Pages.GAME:
-                    GameView(treasures: treasures)
+                    GameView(cards: buildCardList(treasures: treasures), treasures: treasures)
                 case Pages.SETTINGS:
                     SettingsView(treasures: treasures)
                 }

@@ -12,7 +12,7 @@ struct SettingsView: View {
     var body: some View {
         VStack{
             List($treasures.items){
-                $item in
+                $item in // Should change to ForEach, see slide 316
                 SettingsRowView(treasure: $item)
                 .swipeActions(edge: .trailing){
                     Button(role: .destructive){
