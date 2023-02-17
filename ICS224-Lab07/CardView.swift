@@ -27,6 +27,14 @@ struct CardView: Identifiable, View {
     }
 }
 
+extension CardView: Equatable {
+    static func == (left: CardView, right: CardView) -> Bool {
+        return  left.picture == right.picture &&
+                left.groupSize == right.groupSize &&
+                left.groupAmt == right.groupAmt
+    }
+}
+
 struct CardView_Previews: PreviewProvider {
     @State static var picture: UIImage = UIImage(systemName: "hare")!
     static var previews: some View {

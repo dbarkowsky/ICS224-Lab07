@@ -14,7 +14,6 @@ struct GameView: View {
     @ObservedObject var treasures: TreasureList
     @State var matchedPairs: Int = 0
     @State var attempts: Int = 0
-    @State var cardCounter: Int = 0
     
     var body: some View {
         VStack{
@@ -25,11 +24,7 @@ struct GameView: View {
                     GridRow(){
                         ForEach(0..<numOfRowsCols, id: \.self){
                             col in
-                            CardView(
-                                picture: cards[row][col].picture,
-                                groupSize: cards[row][col].groupSize,
-                                groupAmt: cards[row][col].groupAmt
-                            )
+                            cards[row][col]
                         }
                     }
                 }
@@ -37,6 +32,16 @@ struct GameView: View {
             
             Text("Attempts: \(attempts)")
             Text("Total Remaining: \(determineTotalRemaining())")
+        }
+        .onChange(of: cards){
+            newValue in
+            // increment attempts
+            attempts += 1
+            // check first flipped card
+            // if any other cards of a different kind are flipped (but not solved), unflip all
+            // if fewer than the group are flipped (but not solved), stay flipped for now
+            // if enough of the same card are flipped (but not solved), mark them as solved, stay flipped
+            // don't count blanks when flipping, they should never stay
         }
     }
             
