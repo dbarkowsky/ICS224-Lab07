@@ -12,17 +12,18 @@ struct CardView: Identifiable, View {
     var picture: UIImage!
     var groupSize: Int = 2
     var groupAmt: Int = 1
+    @State var flipped: Bool = false
+    @State var solved: Bool = false
+    
     var body: some View {
         Button(action: {
-            
+            flipped = !flipped
         }){
-            Image(uiImage: picture)
+            Image(uiImage: flipped ? picture : UIImage(systemName: "circlebadge.fill")!)
                 .scaledToFit()
         }
-//        .overlay(
-//            RoundedRectangle(cornerRadius: 10)
-//                .stroke(.blue, lineWidth: 2)
-//        )
+        .scaledToFit()
+        .frame(width: 32.0, height: 32.0)
     }
 }
 
