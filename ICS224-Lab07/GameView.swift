@@ -10,7 +10,7 @@ import SwiftUI
 
 
 struct GameView: View {
-    @State var cards: [CardView]
+    @State var cards: [[CardView]]
     @ObservedObject var treasures: TreasureList
     @State var matchedPairs: Int = 0
     @State var attempts: Int = 0
@@ -19,19 +19,17 @@ struct GameView: View {
     var body: some View {
         VStack{
             Grid(){
-                let numOfRows = Int(Double(cards.count).squareRoot())
-                let rowLength = numOfRows
-                ForEach(0..<numOfRows){
+                let numOfRowsCols = cards.count
+                ForEach(0..<numOfRowsCols, id: \.self){
                     row in
                     GridRow(){
-                        ForEach(0..<rowLength){
-                            _ in
-//                            CardView(
-//                                picture: cards[cardCounter].picture,
-//                                groupSize: cards[cardCounter].groupSize,
-//                                groupAmt: cards[cardCounter].groupAmt
-//                            )
-                            makeCard(card: cards[cardCounter])
+                        ForEach(0..<numOfRowsCols, id: \.self){
+                            col in
+                            CardView(
+                                picture: cards[row][col].picture,
+                                groupSize: cards[row][col].groupSize,
+                                groupAmt: cards[row][col].groupAmt
+                            )
                         }
                     }
                 }
@@ -40,11 +38,6 @@ struct GameView: View {
             Text("Attempts: \(attempts)")
             Text("Total Remaining: \(determineTotalRemaining())")
         }
-    }
-    
-    func makeCard(card: CardView) -> CardView {
-        cardCounter += 1
-        return card
     }
             
     func determineTotalRemaining() -> Int {
@@ -57,7 +50,7 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     @StateObject static var treasures = TreasureList()
-    @State static var cards: [CardView] = [CardView]()
+    @State static var cards: [[CardView]] = [[CardView]]()
     static var previews: some View {
         GameView(cards: cards, treasures: treasures)
     }

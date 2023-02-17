@@ -7,14 +7,28 @@
 
 import SwiftUI
 
-struct CardView: View {
+struct CardView: Identifiable, View {
+    let id = UUID()
+    var picture: UIImage!
+    var groupSize: Int = 2
+    var groupAmt: Int = 1
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action: {
+            
+        }){
+            Image(uiImage: picture)
+                .scaledToFit()
+        }
+//        .overlay(
+//            RoundedRectangle(cornerRadius: 10)
+//                .stroke(.blue, lineWidth: 2)
+//        )
     }
 }
 
 struct CardView_Previews: PreviewProvider {
+    @State static var picture: UIImage = UIImage(systemName: "hare")!
     static var previews: some View {
-        CardView()
+        CardView(picture: picture)
     }
 }

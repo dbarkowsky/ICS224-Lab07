@@ -15,7 +15,7 @@ struct MainView: View {
     @State var visiblePage: Pages = Pages.START;
     @StateObject var treasures = TreasureList()
     
-    func buildCardList(treasures: TreasureList) -> [CardView] {
+    func buildCardList(treasures: TreasureList) -> [[CardView]] {
         let uniqueCards = treasures.items.map{
             treasure in
             CardView(
@@ -43,12 +43,25 @@ struct MainView: View {
         
         cardCount = cards.count
         let nextPerfectSquare = findNextPerfectSquare(currentCount: cardCount)
+        let squaredValue = Int(Double(nextPerfectSquare).squareRoot())
         
         for _ in cardCount..<nextPerfectSquare {
             cards.append(CardView(picture: UIImage(systemName: "circlebadge")))
         }
         
-        return cards.shuffled()
+        cards = cards.shuffled()
+        var cardGrid: [[CardView]] = [[CardView]]()
+        
+        // Break into 2D array
+        for i in stride(from: 0, to: cards.count, by: squaredValue){
+            var tempRow: [CardView] = [CardView]()
+            for j in 0..<squaredValue {
+                tempRow.append(cards[i + j])
+            }
+            cardGrid.append(tempRow)
+        }
+        
+        return cardGrid
     }
     
     func findNextPerfectSquare(currentCount: Int) -> Int {
