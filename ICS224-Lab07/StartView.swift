@@ -24,6 +24,7 @@ struct StartView: View {
                 
             Spacer()
         }
+        .navigationTitle("")
     }
 }
 

@@ -26,6 +26,6 @@ struct Card: Identifiable {
 
 extension Card: Equatable {
     static func == (left: Card, right: Card) -> Bool {
-        return  true//left.items.flatMap == right.items.flatMap
+        return  left.picture == right.picture
     }
 }

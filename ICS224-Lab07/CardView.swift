@@ -9,18 +9,17 @@ import SwiftUI
 
 struct CardView: Identifiable, View {
     let id = UUID()
-    var picture: UIImage!
-    @State var flipped: Bool
-    @Binding var flipOccurred: Bool
-    @State var solved: Bool = false
-    
+    @ObservedObject var cards: CardList
+    var row: Int
+    var col: Int
+    @Binding var flipOccurred: Bool    
     
     var body: some View {
         Button(action: {
-            flipped = !flipped
+            cards.items[row][col].flipped = !cards.items[row][col].flipped
             flipOccurred = !flipOccurred
         }){
-            Image(uiImage: flipped ? picture : UIImage(systemName: "circlebadge.fill")!)
+            Image(uiImage: cards.items[row][col].flipped ? cards.items[row][col].picture : UIImage(systemName: "circlebadge.fill")!)
                 .scaledToFit()
         }
         .scaledToFit()
@@ -30,15 +29,15 @@ struct CardView: Identifiable, View {
 
 extension CardView: Equatable {
     static func == (left: CardView, right: CardView) -> Bool {
-        return  left.picture == right.picture
+        return  left.cards.items[left.row][left.col].picture == right.cards.items[right.row][right.col].picture
     }
 }
 
-struct CardView_Previews: PreviewProvider {
-    @State static var picture: UIImage = UIImage(systemName: "hare")!
-    @State static var flipped: Bool = false
-    @State static var flipOccurred: Bool = false
-    static var previews: some View {
-        CardView(picture: picture, flipped: flipped, flipOccurred: $flipOccurred)
-    }
-}
+//struct CardView_Previews: PreviewProvider {
+//    @State static var picture: UIImage = UIImage(systemName: "hare")!
+//    @State static var flipped: Bool = false
+//    @State static var flipOccurred: Bool = false
+//    static var previews: some View {
+//        CardView( flipOccurred: $flipOccurred)
+//    }
+//}
