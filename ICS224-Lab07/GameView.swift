@@ -21,8 +21,8 @@ import SwiftUI
 struct GameView: View {
     @ObservedObject var treasures: TreasureList
     @ObservedObject var cards: CardList
-    @State var matchedPairs: Int = 0
-    @State var attempts: Int = 0
+    @Binding var matchedPairs: Int
+    @Binding var attempts: Int
     @State var flipOccurred: Bool = false
     
     var body: some View {

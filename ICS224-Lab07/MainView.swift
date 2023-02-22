@@ -16,13 +16,16 @@ public enum Pages{
 
 /**
  Main view for the application.
- Holds a state for which page should be visiable and two state objects for Treasures and Cards
+ Holds two state objects for Treasures and Cards.
+ Also holds state variables to track the visible page, number of matched pairs, and number of attempts.
  The toolbar for the three views is also contained here.
  */
 struct MainView: View {
     @State var visiblePage: Pages = Pages.START;
     @StateObject var treasures = TreasureList()
     @StateObject var cards: CardList = CardList()
+    @State var matchedPairs: Int = 0
+    @State var attempts: Int = 0
     
     var body: some View {
         NavigationStack{
@@ -31,9 +34,9 @@ struct MainView: View {
                 case Pages.START:
                     StartView()
                 case Pages.GAME:
-                    GameView(treasures: treasures, cards: cards)
+                    GameView(treasures: treasures, cards: cards, matchedPairs: $matchedPairs, attempts: $attempts)
                 case Pages.SETTINGS:
-                    SettingsView(treasures: treasures, cards: cards)
+                    SettingsView(treasures: treasures, cards: cards, matchedPairs: $matchedPairs, attempts: $attempts)
                 }
             }
             .toolbar {

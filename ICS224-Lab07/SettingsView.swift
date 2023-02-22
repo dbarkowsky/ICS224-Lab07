@@ -13,10 +13,14 @@ import SwiftUI
  - Parameters:
     - treasures: A TreasureList object. Passed from parent view.
     - cards: A CardList object. Passed from parent view.
+    - matchedPairs: A counter of how many pairs have been matched in the game.
+    - attempts: A counter of how many attempts the player has made.
  */
 struct SettingsView: View {
     @ObservedObject var treasures: TreasureList
     @ObservedObject var cards: CardList
+    @Binding var matchedPairs: Int
+    @Binding var attempts: Int
     @State var updateOccurred: Bool = false
     
     var body: some View {
@@ -37,6 +41,8 @@ struct SettingsView: View {
             _ in
             cards.items = CardList.buildCardList(treasures: treasures)
             updateOccurred = false
+            attempts = 0
+            matchedPairs = 0
         })
         .navigationTitle("Treasures")
         .toolbar {
@@ -59,10 +65,10 @@ struct SettingsView: View {
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
-    @StateObject static var treasures = TreasureList()
-    @StateObject static var cards: CardList = CardList()
-    static var previews: some View {
-        SettingsView(treasures: treasures, cards: cards)
-    }
-}
+//struct SettingsView_Previews: PreviewProvider {
+//    @StateObject static var treasures = TreasureList()
+//    @StateObject static var cards: CardList = CardList()
+//    static var previews: some View {
+//        SettingsView(treasures: treasures, cards: cards)
+//    }
+//}
