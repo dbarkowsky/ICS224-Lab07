@@ -8,7 +8,16 @@
 import SwiftUI
 
 
-
+/**
+ Displays the GameView.
+ This contains a grid of CardView objects and two text fields
+ Uses a flipOccured boolean to check for flips of any card.
+ - Parameters:
+    - treasures: A TreasureList object. Passed from parent view.
+    - cards: A CardList object. Passed from parent view.
+    - matchedPairs: A counter of how many pairs have been matched in the game.
+    - attempts: A counter of how many attempts the player has made.
+ */
 struct GameView: View {
     @ObservedObject var treasures: TreasureList
     @ObservedObject var cards: CardList
@@ -91,6 +100,10 @@ struct GameView: View {
         }
     }
     
+    /**
+     Turns all cards that are not marked as solved face down.
+     Also increments the user's number of attempts.
+     */
     func turnAllCardsFaceDown(){
         for row in 0..<cards.items.count {
             for col in 0..<cards.items[row].count {
@@ -103,6 +116,12 @@ struct GameView: View {
         attempts += 1
     }
     
+    /**
+     Marks any cards that are flipped and that match the supplied picture as solved.
+     Also increments the user's number of attempts and matched pairs.
+     - Parameters:
+        - picture: A UIImage provided to check all flipped cards against.
+     */
     func markCardsAsSolved(picture: UIImage){
         for row in 0..<cards.items.count {
             for col in 0..<cards.items[row].count {
@@ -116,6 +135,10 @@ struct GameView: View {
         matchedPairs += 1
     }
     
+    /**
+     Determines the number of remaining pairs yet to be solved.
+     - Returns: (Int) The number of pairs unsolved.
+     */
     func determineTotalRemaining() -> Int {
         return treasures.items.reduce(0, {
             acc, curr in

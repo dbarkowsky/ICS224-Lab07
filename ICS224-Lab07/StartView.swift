@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/**
+ Contains the instructions for the game. No interaction required.
+ */
 struct StartView: View {
     var body: some View {
         VStack (alignment: .center){

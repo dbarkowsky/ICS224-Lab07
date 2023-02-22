@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+/**
+ A struct containing information on a single Card.
+ - Parameters:
+    - picture: An image to be displayed when rendered.
+    - groupSize: The number of cards needed to constitute a match.
+    - groupAmt: The number of matches for this particular picture.
+ > The ``flipped`` and ``solved`` variables are used to identify this card's status when running checks for matching cards.
+ */
 struct Card: Identifiable {
     var id = UUID()
     var picture: UIImage

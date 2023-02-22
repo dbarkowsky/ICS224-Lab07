@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+/**
+ Displays a single row of a treasure in the SettingsView.
+ Each row is composed of a TextEditor and two Steppers.
+ - Parameters:
+    - treasure: The treasure to be displayed (Treasure)
+    - updateOccured: A boolean used to monitor for updates in parent views (Bool)
+ */
 struct SettingsRowView: View {
     @Binding var treasure: Treasure
     @Binding var updateOccurred: Bool
@@ -26,8 +33,6 @@ struct SettingsRowView: View {
             ))
             .frame(height: 40.0)
             .textInputAutocapitalization(.never)
-//            Spacer()
-//                .padding(0.0)
             Stepper(value: Binding(
                 get: {treasure.groupSize},
                 set: {
@@ -52,10 +57,3 @@ struct SettingsRowView: View {
         .padding()
     }
 }
-
-//struct SettingsRowView_Previews: PreviewProvider {
-//    @State static var sampleCard: Treasure = Treasure(name: "flower", groupSize: 2, groupAmt: 1)
-//    static var previews: some View {
-//        SettingsRowView(treasure: $sampleCard)
-//    }
-//}

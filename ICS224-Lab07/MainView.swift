@@ -7,14 +7,20 @@
 
 import SwiftUI
 
+/**
+ Enum object to define view states.
+ */
 public enum Pages{
     case START, GAME, SETTINGS
 }
 
+/**
+ Main view for the application.
+ Holds a state for which page should be visiable and two state objects for Treasures and Cards
+ The toolbar for the three views is also contained here.
+ */
 struct MainView: View {
     @State var visiblePage: Pages = Pages.START;
-//    @EnvironmentObject var treasures: TreasureList
-//    @EnvironmentObject var cards: CardList
     @StateObject var treasures = TreasureList()
     @StateObject var cards: CardList = CardList()
     
@@ -30,13 +36,6 @@ struct MainView: View {
                     SettingsView(treasures: treasures, cards: cards)
                 }
             }
-            .onChange(of: visiblePage, perform: {
-                newValue in
-                if (newValue == Pages.GAME){
-                    //cards.items = CardList.buildCardList(treasures: treasures)
-                }
-                print("page change")
-            })
             .toolbar {
                 ToolbarItem(placement: .bottomBar){
                     Button(

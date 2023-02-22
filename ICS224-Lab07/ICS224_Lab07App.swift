@@ -7,14 +7,16 @@
 
 import SwiftUI
 
+/**
+ Struct containing entire App.
+ Displays the MainView.
+ */
 @main
 struct ICS224_Lab07App: App {
-    @StateObject var treasures = TreasureList()
-    @StateObject var cards: CardList = CardList()
     
     var body: some Scene {
         WindowGroup {
-            MainView().environmentObject(treasures).environmentObject(cards)
+            MainView()
         }
     }
 }

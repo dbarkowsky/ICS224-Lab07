@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+/**
+An object to hold data on an individual Treasure.
+ - Parameters:
+    - name: The name of the treasure. (String)
+    - groupSize: The number of treasures needed to constitute a match.
+    - groupAmt: The number of matches for this particular treasure.
+ */
 struct Treasure: Identifiable, Codable {
     var id = UUID()
     var name: String

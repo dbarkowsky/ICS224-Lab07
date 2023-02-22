@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+/**
+ Displays the list of Treasures. Includes a + button to add additional Treasures.
+ Uses an ``updateOccurred`` boolean to check for changes to the treasures list.
+ - Parameters:
+    - treasures: A TreasureList object. Passed from parent view.
+    - cards: A CardList object. Passed from parent view.
+ */
 struct SettingsView: View {
     @ObservedObject var treasures: TreasureList
     @ObservedObject var cards: CardList

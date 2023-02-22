@@ -7,14 +7,19 @@
 
 import SwiftUI
 
+/**
+ Contains a list of Treasure items. Used in order to reference these items as an @ObservedObject.
+ */
 class TreasureList: ObservableObject {
     @Published var items = [Treasure]()
         
+    /// Constructor when no treasures are given. Supplies one default treasure.
     init(){
         // App should always start with one example card item
         items.append(Treasure(name: "hare", groupSize: 2, groupAmt: 1))
     }
     
+    /// Constructor when a list of treasures is supplied.
     init(treasures: [Treasure]){
         self.items = treasures
     }

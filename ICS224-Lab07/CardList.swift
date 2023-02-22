@@ -7,19 +7,38 @@
 
 import SwiftUI
 
+/**
+ Contains a list of Card items. Used in order to reference these items as an @ObservedObject.
+ */
 class CardList: ObservableObject {
     @Published var items = [[Card]]()
         
+    /**
+     Constructor. Uses static method to build card array with starting treasures.
+     */
     init(){
         // Should always have the default cards to start
         items = CardList.buildCardList(treasures: TreasureList())
     }
     
+    /**
+     Finds the next perfect square number above the provided number. e.g. 7 is not a perfect square, so finds 9.
+     - Parameters:
+        - currentCount: The current number (Int)
+     - Returns: The next perfect square number. (Int)
+     */
     static func findNextPerfectSquare(currentCount: Int) -> Int {
         let next = Double(currentCount).squareRoot().rounded(.down) + 1
         return Int(next * next)
     }
-    
+  
+    /**
+    Based on a provided list of treasures, builds a list of cards.
+    Determines unique cards, adds the required number of those cards to get the desired pairs, then fills the list with blank cards to make a perfect square grid.
+     - Parameters:
+        - treasures: A TreasureList that contains an array of Treasure items
+     - Returns: A 2D array of Card items.
+     */
     static func buildCardList(treasures: TreasureList) -> [[Card]] {
         let uniqueCards = treasures.items.map{
             treasure in
