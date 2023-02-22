@@ -91,6 +91,13 @@ class CardList: ObservableObject {
 
 extension CardList: Equatable {
     static func == (left: CardList, right: CardList) -> Bool {
-        return  true//left.items.flatMap == right.items.flatMap
+        let leftFlat = left.items.flatMap { $0 }
+        let rightFlat = right.items.flatMap { $0 }
+        for i in 0..<leftFlat.count{
+            if (leftFlat[i] != rightFlat[i]){
+                return false
+            }
+        }
+        return true
     }
 }

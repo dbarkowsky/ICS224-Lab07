@@ -53,7 +53,7 @@ struct GameView: View {
             _ in
             print("cards change")
             // convert cards to flat array temporarily
-            let flatCards = cards.items.flatMap { $0 }//Array(cards.items).joined()
+            let flatCards = cards.items.flatMap { $0 }
             // get all flipped cards
             let flippedCards = flatCards.filter { $0.flipped == true && $0.solved == false}
             

@@ -36,7 +36,7 @@ struct CardView: Identifiable, View {
 
 extension CardView: Equatable {
     static func == (left: CardView, right: CardView) -> Bool {
-        return  left.cards.items[left.row][left.col].picture == right.cards.items[right.row][right.col].picture
+        return  left.cards.items[left.row][left.col] == right.cards.items[right.row][right.col]
     }
 }
 

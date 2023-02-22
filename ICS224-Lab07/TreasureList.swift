@@ -27,6 +27,11 @@ class TreasureList: ObservableObject {
 
 extension TreasureList: Equatable {
     static func == (left: TreasureList, right: TreasureList) -> Bool {
-        return  true//left.items.flatMap == right.items.flatMap
+        for i in 0..<left.items.count{
+            if (left.items[i] != right.items[i]){
+                return false
+            }
+        }
+        return true
     }
 }
