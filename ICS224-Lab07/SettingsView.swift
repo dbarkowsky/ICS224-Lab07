@@ -9,11 +9,14 @@ import SwiftUI
 
 struct SettingsView: View {
     @ObservedObject var treasures: TreasureList
+    @ObservedObject var cards: CardList
+    @State var updateOccurred: Bool = false
+    
     var body: some View {
         VStack{
             List($treasures.items){
                 $item in // Should change to ForEach, see slide 316
-                SettingsRowView(treasure: $item)
+                SettingsRowView(treasure: $item, updateOccurred: $updateOccurred)
                 .swipeActions(edge: .trailing){
                     Button(role: .destructive){
                         treasures.items.removeAll(where: {$0.id == item.id})
@@ -23,13 +26,19 @@ struct SettingsView: View {
                 }
             }
         }
+        .onChange(of: updateOccurred, perform: {
+            _ in
+            cards.items = CardList.buildCardList(treasures: treasures)
+            updateOccurred = false
+        })
         .navigationTitle("Treasures")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing){
                     Button(
                         action: {
                             withAnimation {
-                                
+                                print("by")
+                                updateOccurred = true
                                 let newRow = Treasure(name: "Change me", groupSize: 2, groupAmt: 1)
                                 treasures.items.insert(newRow, at: 0)
                             }
@@ -45,7 +54,8 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     @StateObject static var treasures = TreasureList()
+    @StateObject static var cards: CardList = CardList()
     static var previews: some View {
-        SettingsView(treasures: treasures)
+        SettingsView(treasures: treasures, cards: cards)
     }
 }

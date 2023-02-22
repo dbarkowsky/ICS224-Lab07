@@ -10,21 +10,26 @@ import SwiftUI
 
 
 struct GameView: View {
-    @State var cards: [[CardView]]
     @ObservedObject var treasures: TreasureList
+    @ObservedObject var cards: CardList
     @State var matchedPairs: Int = 0
     @State var attempts: Int = 0
+    @State var flipOccurred: Bool = false
     
     var body: some View {
         VStack{
             Grid(){
-                let numOfRowsCols = cards.count
+                let numOfRowsCols = cards.items.count
                 ForEach(0..<numOfRowsCols, id: \.self){
                     row in
                     GridRow(){
                         ForEach(0..<numOfRowsCols, id: \.self){
                             col in
-                            cards[row][col]
+                            CardView(
+                                picture: cards.items[row][col].picture,
+                                flipped: cards.items[row][col].flipped,
+                                flipOccurred: $flipOccurred
+                            )
                         }
                     }
                 }
@@ -33,8 +38,9 @@ struct GameView: View {
             Text("Attempts: \(attempts)")
             Text("Total Remaining: \(determineTotalRemaining())")
         }
-        .onChange(of: cards){
+        .onChange(of: flipOccurred){
             newValue in
+            print("cards change")
             // increment attempts
             attempts += 1
             // check first flipped card
@@ -42,6 +48,7 @@ struct GameView: View {
             // if fewer than the group are flipped (but not solved), stay flipped for now
             // if enough of the same card are flipped (but not solved), mark them as solved, stay flipped
             // don't count blanks when flipping, they should never stay
+            
         }
     }
             
@@ -53,10 +60,10 @@ struct GameView: View {
     }
 }
 
-struct GameView_Previews: PreviewProvider {
-    @StateObject static var treasures = TreasureList()
-    @State static var cards: [[CardView]] = [[CardView]]()
-    static var previews: some View {
-        GameView(cards: cards, treasures: treasures)
-    }
-}
+//struct GameView_Previews: PreviewProvider {
+//    @StateObject static var treasures = TreasureList()
+//    @StateObject static var cards = CardList()
+//    static var previews: some View {
+//        GameView(cards: cards)
+//    }
+//}

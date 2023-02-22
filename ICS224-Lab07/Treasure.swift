@@ -19,3 +19,9 @@ struct Treasure: Identifiable, Codable {
         self.groupAmt = groupAmt
     }
 }
+
+extension Treasure: Equatable {
+    static func == (left: Treasure, right: Treasure) -> Bool {
+        return  true//left.items.flatMap == right.items.flatMap
+    }
+}

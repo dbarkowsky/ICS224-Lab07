@@ -2,20 +2,30 @@
 //  Card.swift
 //  ICS224-Lab07
 //
-//  Created by ICS 224 on 2023-02-08.
+//  Created by ICS 224 on 2023-02-22.
 //
 
 import SwiftUI
 
-struct Card: Identifiable, Codable {
+struct Card: Identifiable {
     var id = UUID()
-    var name: String
+    var picture: UIImage
     var groupSize: Int
     var groupAmt: Int
+    var flipped: Bool
+    var solved: Bool
     
-    init (name: String, groupSize: Int = 2, groupAmt: Int = 0){
-        self.name = name
+    init (picture: UIImage, groupSize: Int = 2, groupAmt: Int = 0){
+        self.picture = picture
         self.groupSize = groupSize
         self.groupAmt = groupAmt
+        self.flipped = false
+        self.solved = false
+    }
+}
+
+extension Card: Equatable {
+    static func == (left: Card, right: Card) -> Bool {
+        return  true//left.items.flatMap == right.items.flatMap
     }
 }

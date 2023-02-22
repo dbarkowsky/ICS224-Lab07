@@ -13,61 +13,10 @@ public enum Pages{
 
 struct MainView: View {
     @State var visiblePage: Pages = Pages.START;
+//    @EnvironmentObject var treasures: TreasureList
+//    @EnvironmentObject var cards: CardList
     @StateObject var treasures = TreasureList()
-    
-    func buildCardList(treasures: TreasureList) -> [[CardView]] {
-        let uniqueCards = treasures.items.map{
-            treasure in
-            CardView(
-                picture: UIImage(systemName: treasure.name) ?? UIImage(systemName: "questionmark.circle"),
-                groupSize: treasure.groupSize,
-                groupAmt: treasure.groupAmt
-            )
-        }
-        var cardCount = uniqueCards.count
-        
-        var cards: [CardView] = []
-        
-        for card in uniqueCards{
-            let amountToAdd = (card.groupSize * card.groupAmt)
-            for _ in 0..<amountToAdd{
-                cards.append(
-                    CardView(
-                        picture: card.picture,
-                        groupSize: card.groupSize,
-                        groupAmt: card.groupAmt
-                    )
-                )
-            }
-        }
-        
-        cardCount = cards.count
-        let nextPerfectSquare = findNextPerfectSquare(currentCount: cardCount)
-        let squaredValue = Int(Double(nextPerfectSquare).squareRoot())
-        
-        for _ in cardCount..<nextPerfectSquare {
-            cards.append(CardView(picture: UIImage(systemName: "circlebadge")))
-        }
-        
-        cards = cards.shuffled()
-        var cardGrid: [[CardView]] = [[CardView]]()
-        
-        // Break into 2D array
-        for i in stride(from: 0, to: cards.count, by: squaredValue){
-            var tempRow: [CardView] = [CardView]()
-            for j in 0..<squaredValue {
-                tempRow.append(cards[i + j])
-            }
-            cardGrid.append(tempRow)
-        }
-        
-        return cardGrid
-    }
-    
-    func findNextPerfectSquare(currentCount: Int) -> Int {
-        let next = Double(currentCount).squareRoot().rounded(.down) + 1
-        return Int(next * next)
-    }
+    @StateObject var cards: CardList = CardList()
     
     var body: some View {
         NavigationStack{
@@ -76,11 +25,18 @@ struct MainView: View {
                 case Pages.START:
                     StartView()
                 case Pages.GAME:
-                    GameView(cards: buildCardList(treasures: treasures), treasures: treasures)
+                    GameView(treasures: treasures, cards: cards)
                 case Pages.SETTINGS:
-                    SettingsView(treasures: treasures)
+                    SettingsView(treasures: treasures, cards: cards)
                 }
             }
+            .onChange(of: visiblePage, perform: {
+                newValue in
+                if (newValue == Pages.GAME){
+                    //cards.items = CardList.buildCardList(treasures: treasures)
+                }
+                print("page change")
+            })
             .toolbar {
                 ToolbarItem(placement: .bottomBar){
                     Button(

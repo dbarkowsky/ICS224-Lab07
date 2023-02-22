@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingsRowView: View {
     @Binding var treasure: Treasure
+    @Binding var updateOccurred: Bool
     private let groupRange = 2...10;
     private let amtRange = 1...10;
     var body: some View {
@@ -20,6 +21,7 @@ struct SettingsRowView: View {
                 set: {
                     newValue in
                     treasure.name = newValue
+                    updateOccurred = true
                 }
             ))
             .frame(height: 40.0)
@@ -31,6 +33,7 @@ struct SettingsRowView: View {
                 set: {
                     newValue in
                     treasure.groupSize = newValue
+                    updateOccurred = true
                 }), in: groupRange, step: 1){
                 Text("\(treasure.groupSize)/group")
                 }
@@ -40,6 +43,7 @@ struct SettingsRowView: View {
                 set: {
                     newValue in
                     treasure.groupAmt = newValue
+                    updateOccurred = true
                 }), in: amtRange, step: 1){
                 Text("\(treasure.groupAmt) group")
                 }
@@ -49,9 +53,9 @@ struct SettingsRowView: View {
     }
 }
 
-struct SettingsRowView_Previews: PreviewProvider {
-    @State static var sampleCard: Treasure = Treasure(name: "flower", groupSize: 2, groupAmt: 1)
-    static var previews: some View {
-        SettingsRowView(treasure: $sampleCard)
-    }
-}
+//struct SettingsRowView_Previews: PreviewProvider {
+//    @State static var sampleCard: Treasure = Treasure(name: "flower", groupSize: 2, groupAmt: 1)
+//    static var previews: some View {
+//        SettingsRowView(treasure: $sampleCard)
+//    }
+//}

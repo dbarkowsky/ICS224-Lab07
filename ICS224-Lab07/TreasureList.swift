@@ -14,4 +14,14 @@ class TreasureList: ObservableObject {
         // App should always start with one example card item
         items.append(Treasure(name: "hare", groupSize: 2, groupAmt: 1))
     }
+    
+    init(treasures: [Treasure]){
+        self.items = treasures
+    }
+}
+
+extension TreasureList: Equatable {
+    static func == (left: TreasureList, right: TreasureList) -> Bool {
+        return  true//left.items.flatMap == right.items.flatMap
+    }
 }
