@@ -40,6 +40,7 @@ struct MainView: View {
                 }
             }
             .toolbar {
+                ToolbarItem(placement: .bottomBar){ Spacer()}
                 ToolbarItem(placement: .bottomBar){
                     Button(
                         action: {
@@ -72,6 +73,7 @@ struct MainView: View {
                         }
                     )
                 }
+                ToolbarItem(placement: .bottomBar){ Spacer()}
             }
         }
     }
