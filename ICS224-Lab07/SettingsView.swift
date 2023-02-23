@@ -56,7 +56,7 @@ struct SettingsView: View {
                         action: {
                             withAnimation {
                                 updateOccurred = true
-                                let newRow = Treasure(name: "Change me", groupSize: 2, groupAmt: 1)
+                                let newRow = Treasure(name: "", groupSize: 2, groupAmt: 1)
                                 treasures.items.insert(newRow, at: 0)
                             }
                         }

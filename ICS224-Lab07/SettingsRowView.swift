@@ -21,7 +21,7 @@ struct SettingsRowView: View {
     var body: some View {
         ScrollView(.horizontal){
             HStack {
-                TextEditor(text: Binding(
+                TextField("Enter icon name" ,text: Binding(
                     get: {
                         treasure.name
                     },
@@ -32,7 +32,6 @@ struct SettingsRowView: View {
                 ))
                 .textInputAutocapitalization(.never)
                 .frame(minWidth: 200, maxWidth: .infinity)
-                .frame(height: 35.0)
                 HStack{
                     Stepper(value: Binding(
                         get: {treasure.groupSize},
