@@ -51,7 +51,6 @@ struct GameView: View {
         .navigationTitle("")
         .onChange(of: flipOccurred){
             _ in
-            print("cards change")
             // convert cards to flat array temporarily
             let flatCards = cards.items.flatMap { $0 }
             // get all flipped cards

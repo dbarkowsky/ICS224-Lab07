@@ -25,14 +25,19 @@ struct SettingsView: View {
     
     var body: some View {
         VStack{
-            List($treasures.items){
-                $item in // Should change to ForEach, see slide 316
-                SettingsRowView(treasure: $item, updateOccurred: $updateOccurred)
-                .swipeActions(edge: .trailing){
-                    Button(role: .destructive){
-                        treasures.items.removeAll(where: {$0.id == item.id})
-                    } label: {
-                        Label("Delete", systemImage: "trash")
+            List{
+                ForEach($treasures.items){
+                    $item in
+                    SettingsRowView(treasure: $item, updateOccurred: $updateOccurred)
+                }
+                .onMove{
+                    treasures.items.move(fromOffsets: $0, toOffset: $1)
+                    updateOccurred = true
+                }
+                .onDelete{
+                    if let id = $0.first {
+                        treasures.items.remove(at: id)
+                        updateOccurred = true
                     }
                 }
             }
@@ -47,10 +52,12 @@ struct SettingsView: View {
         .navigationTitle("Treasures")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing){
+                EditButton()
+            }
+            ToolbarItem(placement: .navigationBarTrailing){
                     Button(
                         action: {
                             withAnimation {
-                                print("by")
                                 updateOccurred = true
                                 let newRow = Treasure(name: "Change me", groupSize: 2, groupAmt: 1)
                                 treasures.items.insert(newRow, at: 0)

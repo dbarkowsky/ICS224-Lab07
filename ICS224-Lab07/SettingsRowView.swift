@@ -20,40 +20,49 @@ struct SettingsRowView: View {
     private let groupRange = 2...10;
     private let amtRange = 1...10;
     var body: some View {
-        HStack {
-            TextEditor(text: Binding(
-                get: {
-                    treasure.name
-                },
-                set: {
-                    newValue in
-                    treasure.name = newValue
-                    updateOccurred = true
+        ScrollView(.horizontal){
+            HStack {
+                TextEditor(text: Binding(
+                    get: {
+                        treasure.name
+                    },
+                    set: {
+                        newValue in
+                        treasure.name = newValue
+                        updateOccurred = true
+                    }
+                ))
+                .textInputAutocapitalization(.never)
+                .frame(minWidth: 200, maxWidth: .infinity)
+                .frame(height: 35.0)
+                HStack{
+                    Stepper(value: Binding(
+                        get: {treasure.groupSize},
+                        set: {
+                            newValue in
+                            treasure.groupSize = newValue
+                            updateOccurred = true
+                        }), in: groupRange, step: 1){
+                            Text("\(treasure.groupSize)/group")
+                            .frame(minWidth: 80)
+                        }
+                    .padding(.horizontal, 15.0)
+                    Stepper(value: Binding(
+                        get: {treasure.groupAmt},
+                        set: {
+                            newValue in
+                            treasure.groupAmt = newValue
+                            updateOccurred = true
+                        }), in: amtRange, step: 1){
+                            Text("\(treasure.groupAmt) group")
+                            .frame(minWidth: 80)
+                        }
+                    .padding(.horizontal, 15.0)
                 }
-            ))
-            .frame(height: 40.0)
-            .textInputAutocapitalization(.never)
-            Stepper(value: Binding(
-                get: {treasure.groupSize},
-                set: {
-                    newValue in
-                    treasure.groupSize = newValue
-                    updateOccurred = true
-                }), in: groupRange, step: 1){
-                Text("\(treasure.groupSize)/group")
-                }
-                .padding(.horizontal, 15.0)
-            Stepper(value: Binding(
-                get: {treasure.groupAmt},
-                set: {
-                    newValue in
-                    treasure.groupAmt = newValue
-                    updateOccurred = true
-                }), in: amtRange, step: 1){
-                Text("\(treasure.groupAmt) group")
-                }
-                .padding(.horizontal, 15.0)
+                .frame(alignment: .trailing)
+            }
+            .frame(minHeight: 15)
+            .padding()
         }
-        .padding()
     }
 }
