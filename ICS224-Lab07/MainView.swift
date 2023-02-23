@@ -48,6 +48,7 @@ struct MainView: View {
                         },
                         label: {
                             Text("Start")
+                                .foregroundColor(visiblePage == Pages.START ? Color.blue : Color.gray)
                         }
                     )
                 }
@@ -59,6 +60,7 @@ struct MainView: View {
                         },
                         label: {
                             Text("Game")
+                                .foregroundColor(visiblePage == Pages.GAME ? Color.blue : Color.gray)
                         }
                     )
                 }
@@ -70,6 +72,7 @@ struct MainView: View {
                         },
                         label: {
                             Text("Settings")
+                                .foregroundColor(visiblePage == Pages.SETTINGS ? Color.blue : Color.gray)
                         }
                     )
                 }
