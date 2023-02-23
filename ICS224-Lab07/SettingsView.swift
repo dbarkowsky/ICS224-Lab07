@@ -28,24 +28,21 @@ struct SettingsView: View {
             List{
                 ForEach($treasures.items){
                     $item in
-                    SettingsRowView(treasure: $item, updateOccurred: $updateOccurred)
+                    SettingsRowView(treasure: $item)
                 }
                 .onMove{
                     treasures.items.move(fromOffsets: $0, toOffset: $1)
-                    updateOccurred = true
                 }
                 .onDelete{
                     if let id = $0.first {
                         treasures.items.remove(at: id)
-                        updateOccurred = true
                     }
                 }
             }
         }
-        .onChange(of: updateOccurred, perform: {
+        .onChange(of: treasures.items, perform: {
             _ in
             cards.items = CardList.buildCardList(treasures: treasures)
-            updateOccurred = false
             attempts = 0
             matchedPairs = 0
         })
