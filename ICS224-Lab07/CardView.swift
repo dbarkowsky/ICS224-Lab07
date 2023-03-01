@@ -16,17 +16,13 @@ import SwiftUI
  */
 struct CardView: Identifiable, View {
     let id = UUID()
-    @ObservedObject var cards: CardList
-    var row: Int
-    var col: Int
-    @Binding var flipOccurred: Bool    
+    @Binding var card: Card
     
     var body: some View {
         Button(action: {
-            cards.items[row][col].flipped = !cards.items[row][col].flipped
-            flipOccurred = !flipOccurred
+            card.flipped = true
         }){
-            Image(uiImage: cards.items[row][col].flipped ? cards.items[row][col].picture : UIImage(systemName: "circlebadge.fill")!)
+            Image(uiImage: card.flipped ? card.picture : UIImage(systemName: "circlebadge.fill")!)
                 .scaledToFit()
         }
         .scaledToFit()
@@ -36,7 +32,7 @@ struct CardView: Identifiable, View {
 
 extension CardView: Equatable {
     static func == (left: CardView, right: CardView) -> Bool {
-        return  left.cards.items[left.row][left.col] == right.cards.items[right.row][right.col]
+        return  left.card == right.card
     }
 }
 

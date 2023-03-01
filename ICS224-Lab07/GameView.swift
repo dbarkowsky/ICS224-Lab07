@@ -23,7 +23,6 @@ struct GameView: View {
     @ObservedObject var cards: CardList
     @Binding var matchedPairs: Int
     @Binding var attempts: Int
-    @State var flipOccurred: Bool = false
     
     var body: some View {
         VStack{
@@ -35,10 +34,7 @@ struct GameView: View {
                         ForEach(0..<numOfRowsCols, id: \.self){
                             col in
                             CardView(
-                                cards: cards,
-                                row: row,
-                                col: col,
-                                flipOccurred: $flipOccurred
+                                card: $cards.items[row][col]
                             )
                         }
                     }
@@ -49,7 +45,7 @@ struct GameView: View {
             Text("Total Remaining: \(determineTotalRemaining())")
         }
         .navigationTitle("")
-        .onChange(of: flipOccurred){
+        .onChange(of: cards.items){
             _ in
             // convert cards to flat array temporarily
             let flatCards = cards.items.flatMap { $0 }

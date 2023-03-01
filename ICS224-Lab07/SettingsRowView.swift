@@ -31,10 +31,9 @@ struct SettingsRowView: View {
                     }
                 ))
                 .textInputAutocapitalization(.never)
+                .frame(minWidth: 275, maxWidth: .infinity)
                 .scaledToFill()
-                //.frame(minWidth: 275, maxWidth: .infinity)
-                
-                Spacer().layoutPriority(-1)
+                //Spacer().layoutPriority(-1)
                 HStack{
                     Stepper(value: Binding(
                         get: {treasure.groupSize},
