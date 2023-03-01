@@ -35,12 +35,3 @@ extension CardView: Equatable {
         return  left.card == right.card
     }
 }
-
-//struct CardView_Previews: PreviewProvider {
-//    @State static var picture: UIImage = UIImage(systemName: "hare")!
-//    @State static var flipped: Bool = false
-//    @State static var flipOccurred: Bool = false
-//    static var previews: some View {
-//        CardView( flipOccurred: $flipOccurred)
-//    }
-//}

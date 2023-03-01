@@ -56,7 +56,7 @@ struct SettingsView: View {
                         action: {
                             withAnimation {
                                 updateOccurred = true
-                                let newRow = Treasure(name: "", groupSize: 2, groupAmt: 1)
+                                let newRow = Treasure(name: "")
                                 treasures.items.insert(newRow, at: 0)
                             }
                         }
@@ -68,11 +68,3 @@ struct SettingsView: View {
         }
     }
 }
-
-//struct SettingsView_Previews: PreviewProvider {
-//    @StateObject static var treasures = TreasureList()
-//    @StateObject static var cards: CardList = CardList()
-//    static var previews: some View {
-//        SettingsView(treasures: treasures, cards: cards)
-//    }
-//}

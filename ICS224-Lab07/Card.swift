@@ -23,7 +23,7 @@ struct Card: Identifiable {
     var flipped: Bool
     var solved: Bool
     
-    init (picture: UIImage, groupSize: Int = 2, groupAmt: Int = 0){
+    init (picture: UIImage, groupSize: Int = 2, groupAmt: Int = 1){
         self.picture = picture
         self.groupSize = groupSize
         self.groupAmt = groupAmt

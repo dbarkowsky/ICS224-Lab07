@@ -13,10 +13,10 @@ import SwiftUI
  This contains a grid of CardView objects and two text fields
  Uses a flipOccured boolean to check for flips of any card.
  - Parameters:
- - treasures: A TreasureList object. Passed from parent view.
- - cards: A CardList object. Passed from parent view.
- - matchedPairs: A counter of how many pairs have been matched in the game.
- - attempts: A counter of how many attempts the player has made.
+    - treasures: A TreasureList object. Passed from parent view.
+    - cards: A CardList object. Passed from parent view.
+    - matchedPairs: A counter of how many pairs have been matched in the game.
+    - attempts: A counter of how many attempts the player has made.
  */
 struct GameView: View {
     @ObservedObject var treasures: TreasureList
@@ -42,7 +42,7 @@ struct GameView: View {
             }
             
             Text("Attempts: \(attempts)")
-            Text("Total Remaining: \(determineTotalRemaining())")
+            Text(determineTotalRemaining() == 0 ? "Game Over. You Win!" : "Total Remaining: \(determineTotalRemaining())")
         }
         .navigationTitle("")
         .onChange(of: cards.items){
@@ -110,7 +110,6 @@ struct GameView: View {
     
     /**
      Turns all cards that are not marked as solved face down.
-     Also increments the user's number of attempts.
      */
     func turnAllCardsFaceDown(){
         for row in 0..<cards.items.count {
@@ -124,7 +123,7 @@ struct GameView: View {
     
     /**
      Marks any cards that are flipped and that match the supplied picture as solved.
-     Also increments the user's number of attempts and matched pairs.
+     Also increments the user's matched pairs.
      - Parameters:
         - picture: A UIImage provided to check all flipped cards against.
      */
@@ -151,11 +150,3 @@ struct GameView: View {
         return remaining < 0 ? 0 : remaining
     }
 }
-
-//struct GameView_Previews: PreviewProvider {
-//    @StateObject static var treasures = TreasureList()
-//    @StateObject static var cards = CardList()
-//    static var previews: some View {
-//        GameView(cards: cards)
-//    }
-//}
