@@ -34,6 +34,7 @@ struct Card: Identifiable {
 
 extension Card: Equatable {
     static func == (left: Card, right: Card) -> Bool {
-        return  left.picture == right.picture
+        return  left.picture == right.picture &&
+        left.flipped == right.flipped
     }
 }

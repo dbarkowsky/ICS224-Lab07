@@ -13,10 +13,10 @@ import SwiftUI
  This contains a grid of CardView objects and two text fields
  Uses a flipOccured boolean to check for flips of any card.
  - Parameters:
-    - treasures: A TreasureList object. Passed from parent view.
-    - cards: A CardList object. Passed from parent view.
-    - matchedPairs: A counter of how many pairs have been matched in the game.
-    - attempts: A counter of how many attempts the player has made.
+ - treasures: A TreasureList object. Passed from parent view.
+ - cards: A CardList object. Passed from parent view.
+ - matchedPairs: A counter of how many pairs have been matched in the game.
+ - attempts: A counter of how many attempts the player has made.
  */
 struct GameView: View {
     @ObservedObject var treasures: TreasureList
@@ -69,7 +69,7 @@ struct GameView: View {
                     // if any other cards of a different kind are flipped (but not solved), unflip all
                     var differentCardsAreFlipped = false
                     for card in flippedCards{
-                        if (card != firstCard){
+                        if (card.picture != firstCard.picture){
                             differentCardsAreFlipped = true
                         }
                     }
@@ -139,10 +139,11 @@ struct GameView: View {
      - Returns: (Int) The number of pairs unsolved.
      */
     func determineTotalRemaining() -> Int {
-        return treasures.items.reduce(0, {
+        let remaining = treasures.items.reduce(0, {
             acc, curr in
             acc + curr.groupAmt
         }) - matchedPairs
+        return remaining < 0 ? 0 : remaining
     }
 }
 

@@ -31,7 +31,10 @@ struct SettingsRowView: View {
                     }
                 ))
                 .textInputAutocapitalization(.never)
-                .frame(minWidth: 200, maxWidth: .infinity)
+                .scaledToFill()
+                //.frame(minWidth: 275, maxWidth: .infinity)
+                
+                Spacer().layoutPriority(-1)
                 HStack{
                     Stepper(value: Binding(
                         get: {treasure.groupSize},
@@ -49,7 +52,7 @@ struct SettingsRowView: View {
                             newValue in
                             treasure.groupAmt = newValue
                         }), in: amtRange, step: 1){
-                            Text("\(treasure.groupAmt) group")
+                            Text("\(treasure.groupAmt) group\(treasure.groupAmt > 1 ? "s" : "")")
                             .frame(minWidth: 80)
                         }
                     .padding(.horizontal, 15.0)
