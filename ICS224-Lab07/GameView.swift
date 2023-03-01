@@ -47,21 +47,30 @@ struct GameView: View {
         .navigationTitle("")
         .onChange(of: cards.items){
             _ in
+            // increment attempts
+            attempts += 1
+            
+            // if any blank cards are flipped, mark them as solved
+            for row in 0..<cards.items.count{
+                for col in 0..<cards.items[row].count{
+                    if (cards.items[row][col].picture == Constants.defaultImage && cards.items[row][col].flipped == true){
+                        cards.items[row][col].solved = true
+                    }
+                }
+            }
+
             // convert cards to flat array temporarily
             let flatCards = cards.items.flatMap { $0 }
             // get all flipped cards
-            let flippedCards = flatCards.filter { $0.flipped == true && $0.solved == false}
+            let flippedCards = flatCards.filter { $0.flipped == true && $0.solved == false }
             
             // pause for user to see board
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1){
                 // as long as there is at least one flipped card
-                if (flippedCards.count > 0){
+                if (flippedCards.count > 1){
                     // get first card
                     let firstCard = flippedCards[0]
-                    // if it's only a blank that was flipped, flip it back
-                    if (firstCard.picture == UIImage(systemName: "circlebadge") && flippedCards.count == 1){
-                        turnAllCardsFaceDown()
-                    }
+
                     // if any other cards of a different kind are flipped (but not solved), unflip all
                     var differentCardsAreFlipped = false
                     for card in flippedCards{
@@ -69,6 +78,7 @@ struct GameView: View {
                             differentCardsAreFlipped = true
                         }
                     }
+                    
                     // if enough of the same card are flipped (but not solved), mark them as solved, stay flipped
                     var aMatchIsFound = false
                     let groupSize = firstCard.groupSize
@@ -91,7 +101,10 @@ struct GameView: View {
                         // do nothing
                     }
                 }
+                
             }
+            
+            
         }
     }
     
@@ -107,8 +120,6 @@ struct GameView: View {
                 }
             }
         }
-        // increment attempts
-        attempts += 1
     }
     
     /**
@@ -125,8 +136,6 @@ struct GameView: View {
                 }
             }
         }
-        // increment attempts
-        attempts += 1
         matchedPairs += 1
     }
     

@@ -20,21 +20,26 @@ struct SettingsRowView: View {
     private let amtRange = 1...10;
     var body: some View {
         ScrollView(.horizontal){
-            HStack {
-                TextField("Enter icon name" ,text: Binding(
-                    get: {
-                        treasure.name
-                    },
-                    set: {
-                        newValue in
-                        treasure.name = newValue
-                    }
-                ))
-                .textInputAutocapitalization(.never)
-                .frame(minWidth: 275, maxWidth: .infinity)
-                .scaledToFill()
-                //Spacer().layoutPriority(-1)
-                HStack{
+            Grid(){
+                GridRow(){
+                    TextField("Enter icon name" ,text: Binding(
+                        get: {
+                            treasure.name
+                        },
+                        set: {
+                            newValue in
+                            treasure.name = newValue
+                        }
+                    ))
+                    .textInputAutocapitalization(.never)
+                    //.frame(minWidth: 200, maxWidth: .infinity)
+                    .scaledToFill()
+                    .border(.black)
+                    
+                    Spacer(minLength: 1).border(.green)
+                        .gridCellUnsizedAxes(.horizontal)
+                        .scaledToFill()
+                    
                     Stepper(value: Binding(
                         get: {treasure.groupSize},
                         set: {
@@ -42,9 +47,9 @@ struct SettingsRowView: View {
                             treasure.groupSize = newValue
                         }), in: groupRange, step: 1){
                             Text("\(treasure.groupSize)/group")
-                            .frame(minWidth: 80)
+                                .frame(minWidth: 80)
                         }
-                    .padding(.horizontal, 15.0)
+                        .padding(.horizontal, 15.0)
                     Stepper(value: Binding(
                         get: {treasure.groupAmt},
                         set: {
@@ -52,14 +57,16 @@ struct SettingsRowView: View {
                             treasure.groupAmt = newValue
                         }), in: amtRange, step: 1){
                             Text("\(treasure.groupAmt) group\(treasure.groupAmt > 1 ? "s" : "")")
-                            .frame(minWidth: 80)
+                                .frame(minWidth: 80)
                         }
-                    .padding(.horizontal, 15.0)
+                        .padding(.horizontal, 15.0)
                 }
-                .frame(alignment: .trailing)
             }
-            .frame(minHeight: 15)
-            .padding()
+            .frame(maxWidth: .infinity, minHeight: 15)
+            .scaledToFill()
+            .border(.red)
+            //.padding()
         }
+        .border(.blue)
     }
 }

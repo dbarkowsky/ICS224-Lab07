@@ -22,7 +22,7 @@ struct CardView: Identifiable, View {
         Button(action: {
             card.flipped = true
         }){
-            Image(uiImage: card.flipped ? card.picture : UIImage(systemName: "circlebadge.fill")!)
+            Image(uiImage: card.solved ? Constants.defaultImage : card.flipped ? card.picture : Constants.hiddenImage)
                 .scaledToFit()
         }
         .scaledToFit()

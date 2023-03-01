@@ -20,3 +20,9 @@ struct ICS224_Lab07App: App {
         }
     }
 }
+
+struct Constants {
+    static let defaultImage: UIImage = UIImage(systemName: "circlebadge")!
+    static let hiddenImage: UIImage = UIImage(systemName: "circlebadge.fill")!
+    static let unknownImage: UIImage = UIImage(systemName: "questionmark.circle")!
+}

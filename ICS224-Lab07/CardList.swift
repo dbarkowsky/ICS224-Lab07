@@ -43,7 +43,7 @@ class CardList: ObservableObject {
         let uniqueCards = treasures.items.map{
             treasure in
             Card(
-                picture: (UIImage(systemName: treasure.name) ?? UIImage(systemName: "questionmark.circle"))!,
+                picture: UIImage(systemName: treasure.name) ?? Constants.unknownImage,
                 groupSize: treasure.groupSize,
                 groupAmt: treasure.groupAmt
             )
@@ -70,7 +70,7 @@ class CardList: ObservableObject {
         let squaredValue = Int(Double(nextPerfectSquare).squareRoot())
         
         for _ in cardCount..<nextPerfectSquare {
-            cards.append(Card(picture: UIImage(systemName: "circlebadge")!))
+            cards.append(Card(picture: Constants.defaultImage))
         }
         
         cards = cards.shuffled()
