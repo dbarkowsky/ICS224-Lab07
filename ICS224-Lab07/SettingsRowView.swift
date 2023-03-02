@@ -12,12 +12,12 @@ import SwiftUI
  Each row is composed of a TextEditor and two Steppers.
  - Parameters:
     - treasure: The treasure to be displayed (Treasure)
-    - updateOccured: A boolean used to monitor for updates in parent views (Bool)
  */
 struct SettingsRowView: View {
     @Binding var treasure: Treasure
     private let groupRange = 2...10;
     private let amtRange = 1...10;
+    
     var body: some View {
         ScrollView(.horizontal){
             Grid(){
@@ -30,15 +30,16 @@ struct SettingsRowView: View {
                             newValue in
                             treasure.name = newValue
                         }
-                    ))
+                    )).fixedSize()
                     .textInputAutocapitalization(.never)
-                    //.frame(minWidth: 200, maxWidth: .infinity)
-                    .scaledToFill()
-                    .border(.black)
+                    .frame(minWidth: 200, maxWidth: .infinity, alignment: .leading)
+                    //.scaledToFill()
+                    //.border(.black)
                     
-                    Spacer(minLength: 1).border(.green)
-                        .gridCellUnsizedAxes(.horizontal)
-                        .scaledToFill()
+//                    Spacer()
+//                        .border(.green)
+//                        //.gridCellUnsizedAxes(.horizontal)
+//                        //.scaledToFit()
                     
                     Stepper(value: Binding(
                         get: {treasure.groupSize},
@@ -49,7 +50,8 @@ struct SettingsRowView: View {
                             Text("\(treasure.groupSize)/group")
                                 .frame(minWidth: 80)
                         }
-                        .padding(.horizontal, 15.0)
+                        .padding(.horizontal, 7.0)
+                        .frame(alignment: .trailing)
                     Stepper(value: Binding(
                         get: {treasure.groupAmt},
                         set: {
@@ -59,12 +61,18 @@ struct SettingsRowView: View {
                             Text("\(treasure.groupAmt) group\(treasure.groupAmt > 1 ? "s" : "")")
                                 .frame(minWidth: 80)
                         }
-                        .padding(.horizontal, 15.0)
+                        .padding(.horizontal, 7.0)
+                        .frame(alignment: .trailing)
                 }
+                .alignmentGuide(.trailing, computeValue: { _ in
+                    return 0
+                })
+                .frame(alignment: .leading)
+                .padding()
             }
-            .frame(maxWidth: .infinity, minHeight: 15)
+            //.frame(minWidth: 400)
             .scaledToFill()
-            .border(.red)
+            //.border(.red)
             //.padding()
         }
         .border(.blue)

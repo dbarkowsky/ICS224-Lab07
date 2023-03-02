@@ -9,10 +9,7 @@ import SwiftUI
 /**
  Displays a single card as an image.
  - Parameters:
-    - cards: A CardList object to give access to the entire list of cards and make appropriate changes. (CardList)
-    - row: This card's row location (Int)
-    - col: This card's column location (Int)
-    - flipOccurred: Used to track whether this card changes anything. Observed by parent view. (Bool)
+    - card: A Card object to give access to the relevant cards and make appropriate changes. (Card)
  */
 struct CardView: Identifiable, View {
     let id = UUID()

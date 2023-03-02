@@ -21,6 +21,7 @@ struct ICS224_Lab07App: App {
     }
 }
 
+/// Holds constants available throughout application.
 struct Constants {
     static let defaultImage: UIImage = UIImage(systemName: "circlebadge")!
     static let hiddenImage: UIImage = UIImage(systemName: "circlebadge.fill")!

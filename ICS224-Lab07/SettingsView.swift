@@ -9,19 +9,17 @@ import SwiftUI
 
 /**
  Displays the list of Treasures. Includes a + button to add additional Treasures.
- Uses an ``updateOccurred`` boolean to check for changes to the treasures list.
  - Parameters:
-    - treasures: A TreasureList object. Passed from parent view.
-    - cards: A CardList object. Passed from parent view.
-    - matchedPairs: A counter of how many pairs have been matched in the game.
-    - attempts: A counter of how many attempts the player has made.
+    - treasures: A TreasureList object. Passed from parent view. (TreasureList)
+    - cards: A CardList object. Passed from parent view. (CardList)
+    - matchedPairs: A counter of how many pairs have been matched in the game. (Int)
+    - attempts: A counter of how many attempts the player has made. (Int)
  */
 struct SettingsView: View {
     @ObservedObject var treasures: TreasureList
     @ObservedObject var cards: CardList
     @Binding var matchedPairs: Int
     @Binding var attempts: Int
-    @State var updateOccurred: Bool = false
     
     var body: some View {
         VStack{
@@ -55,7 +53,6 @@ struct SettingsView: View {
                     Button(
                         action: {
                             withAnimation {
-                                updateOccurred = true
                                 let newRow = Treasure(name: "")
                                 treasures.items.insert(newRow, at: 0)
                             }

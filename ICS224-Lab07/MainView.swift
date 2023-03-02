@@ -19,6 +19,11 @@ public enum Pages{
  Holds two state objects for Treasures and Cards.
  Also holds state variables to track the visible page, number of matched pairs, and number of attempts.
  The toolbar for the three views is also contained here.
+ - Parameters:
+    - treasures: A TreasureList object. Passed from parent view. (TreasureList)
+    - cards: A CardList object. Passed from parent view. (CardList)
+    - matchedPairs: A counter of how many pairs have been matched in the game. (Int)
+    - attempts: A counter of how many attempts the player has made. (Int)
  */
 struct MainView: View {
     @State var visiblePage: Pages = Pages.START;

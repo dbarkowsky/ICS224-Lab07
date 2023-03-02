@@ -11,7 +11,6 @@ import SwiftUI
 /**
  Displays the GameView.
  This contains a grid of CardView objects and two text fields
- Uses a flipOccured boolean to check for flips of any card.
  - Parameters:
     - treasures: A TreasureList object. Passed from parent view.
     - cards: A CardList object. Passed from parent view.
@@ -49,15 +48,6 @@ struct GameView: View {
             _ in
             // increment attempts
             attempts += 1
-            
-            // if any blank cards are flipped, mark them as solved
-            for row in 0..<cards.items.count{
-                for col in 0..<cards.items[row].count{
-                    if (cards.items[row][col].picture == Constants.defaultImage && cards.items[row][col].flipped == true){
-                        cards.items[row][col].solved = true
-                    }
-                }
-            }
 
             // convert cards to flat array temporarily
             let flatCards = cards.items.flatMap { $0 }
@@ -66,6 +56,12 @@ struct GameView: View {
             
             // pause for user to see board
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1){
+                // if there is only one flipped card
+                if (flippedCards.count == 1){
+                    if flippedCards[0].picture == Constants.defaultImage{
+                        markSingleCardAsSolved(id: flippedCards[0].id)
+                    }
+                } else
                 // as long as there is at least one flipped card
                 if (flippedCards.count > 1){
                     // get first card
@@ -74,7 +70,7 @@ struct GameView: View {
                     // if any other cards of a different kind are flipped (but not solved), unflip all
                     var differentCardsAreFlipped = false
                     for card in flippedCards{
-                        if (card.picture != firstCard.picture){
+                        if (card.picture != firstCard.picture && card.picture != Constants.defaultImage){
                             differentCardsAreFlipped = true
                         }
                     }
@@ -84,7 +80,7 @@ struct GameView: View {
                     let groupSize = firstCard.groupSize
                     var cardCount = 0
                     for card in flippedCards{
-                        if (card.picture == firstCard.picture){
+                        if (card.picture == firstCard.picture && card.picture != Constants.defaultImage){
                             cardCount += 1
                         }
                     }
@@ -110,20 +106,27 @@ struct GameView: View {
     
     /**
      Turns all cards that are not marked as solved face down.
+     First checks if any flipped cards are the blank inserts. Those should not flip back, so they are marked solved.
+     Decrements attempts to counter trigger of onChange event.
      */
     func turnAllCardsFaceDown(){
         for row in 0..<cards.items.count {
             for col in 0..<cards.items[row].count {
+                if (cards.items[row][col].flipped && cards.items[row][col].picture == Constants.defaultImage){
+                    cards.items[row][col].solved = true
+                }
                 if (cards.items[row][col].solved == false){
                     cards.items[row][col].flipped = false
                 }
             }
         }
+        attempts -= 1
     }
     
     /**
      Marks any cards that are flipped and that match the supplied picture as solved.
      Also increments the user's matched pairs.
+     Decrements attempts to counter trigger of onChange event.
      - Parameters:
         - picture: A UIImage provided to check all flipped cards against.
      */
@@ -136,6 +139,21 @@ struct GameView: View {
             }
         }
         matchedPairs += 1
+        attempts -= 1
+    }
+    
+    /// Marks a single card as solved based on its UUID
+    /// Decrements attempts to counter trigger of onChange event.
+    /// - Parameter id: A unique id for the card you wish to mark solved
+    func markSingleCardAsSolved(id: UUID){
+        for row in 0..<cards.items.count {
+            for col in 0..<cards.items[row].count {
+                if (cards.items[row][col].id == id){
+                    cards.items[row][col].solved = true
+                }
+            }
+        }
+        attempts -= 1
     }
     
     /**
