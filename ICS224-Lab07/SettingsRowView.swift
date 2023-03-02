@@ -30,16 +30,10 @@ struct SettingsRowView: View {
                             newValue in
                             treasure.name = newValue
                         }
-                    )).fixedSize()
+                    ))
                     .textInputAutocapitalization(.never)
                     .frame(minWidth: 200, maxWidth: .infinity, alignment: .leading)
-                    //.scaledToFill()
-                    //.border(.black)
-                    
-//                    Spacer()
-//                        .border(.green)
-//                        //.gridCellUnsizedAxes(.horizontal)
-//                        //.scaledToFit()
+
                     
                     Stepper(value: Binding(
                         get: {treasure.groupSize},
@@ -67,14 +61,9 @@ struct SettingsRowView: View {
                 .alignmentGuide(.trailing, computeValue: { _ in
                     return 0
                 })
-                .frame(alignment: .leading)
                 .padding()
             }
-            //.frame(minWidth: 400)
             .scaledToFill()
-            //.border(.red)
-            //.padding()
         }
-        .border(.blue)
     }
 }
