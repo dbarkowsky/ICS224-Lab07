@@ -62,7 +62,7 @@ struct GameView: View {
                         markSingleCardAsSolved(id: flippedCards[0].id)
                     }
                 } else
-                // as long as there is at least one flipped card
+                // as long as there is at least two flipped cards
                 if (flippedCards.count > 1){
                     // get first card
                     let firstCard = flippedCards[0]
