@@ -20,6 +20,7 @@ public enum Pages{
  Also holds state variables to track the visible page, number of matched pairs, and number of attempts.
  The toolbar for the three views is also contained here.
  - Parameters:
+    - visiblePage: Tracks which page should be displayed (Pages)
     - treasures: A TreasureList object. Passed from parent view. (TreasureList)
     - cards: A CardList object. Passed from parent view. (CardList)
     - matchedPairs: A counter of how many pairs have been matched in the game. (Int)

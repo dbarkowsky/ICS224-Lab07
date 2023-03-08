@@ -87,6 +87,24 @@ class CardList: ObservableObject {
         
         return cardGrid
     }
+    
+    /// Returns the number of solved cards that aren't blanks
+    /// - Returns: (Int) Number of non-blank solved cards
+    func howManySolvedCards() -> Int {
+        let flatCards = items.flatMap{ $0 }
+        let solvedCards = flatCards.filter { $0.solved == true && $0.picture != Constants.defaultImage }
+        
+        return solvedCards.count
+    }
+    
+    /// Returns the number of cards that aren't blanks
+    /// - Returns: (Int) Number of non-blank cards
+    func howManyFaceCards() -> Int {
+        let flatCards = items.flatMap{ $0 }
+        let faceCards = flatCards.filter { $0.picture != Constants.defaultImage }
+        
+        return faceCards.count
+    }
 }
 
 extension CardList: Equatable {

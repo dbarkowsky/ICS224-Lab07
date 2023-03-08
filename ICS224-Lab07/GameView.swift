@@ -70,7 +70,7 @@ struct GameView: View {
                     // if any other cards of a different kind are flipped (but not solved), unflip all
                     var differentCardsAreFlipped = false
                     for card in flippedCards{
-                        if (card.picture != firstCard.picture && card.picture != Constants.defaultImage){
+                        if (card.picture != firstCard.picture){
                             differentCardsAreFlipped = true
                         }
                     }
@@ -161,10 +161,7 @@ struct GameView: View {
      - Returns: (Int) The number of pairs unsolved.
      */
     func determineTotalRemaining() -> Int {
-        let remaining = treasures.items.reduce(0, {
-            acc, curr in
-            acc + curr.groupAmt
-        }) - matchedPairs
+        let remaining = cards.howManyFaceCards() - cards.howManySolvedCards()
         return remaining < 0 ? 0 : remaining
     }
 }
